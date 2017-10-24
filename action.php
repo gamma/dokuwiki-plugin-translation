@@ -73,7 +73,7 @@ class action_plugin_autotranslation extends DokuWiki_Action_Plugin {
      * @param $event
      * @param $args
      */
-    function page_template_replacement(&$event, $args) {
+    function page_template_replacement(Doku_Event &$event, $args) {
         global $ID;
 
         // load orginal content as template?
@@ -124,7 +124,7 @@ class action_plugin_autotranslation extends DokuWiki_Action_Plugin {
      * @param $event
      * @param $args
      */
-    function translation_js(&$event, $args) {
+    function translation_js(Doku_Event &$event, $args) {
         global $conf;
         if(!isset($_GET['lang'])) return;
         if(!in_array($_GET['lang'], $this->helper->translations)) return;
@@ -140,7 +140,7 @@ class action_plugin_autotranslation extends DokuWiki_Action_Plugin {
      * @param $args
      * @return bool
      */
-    function setJsCacheKey(&$event, $args) {
+    function setJsCacheKey(Doku_Event &$event, $args) {
         if(!isset($this->locale)) return false;
         $count = count($event->data['script']);
         for($i = 0; $i < $count; $i++) {
@@ -158,7 +158,7 @@ class action_plugin_autotranslation extends DokuWiki_Action_Plugin {
      * @param $event
      * @param $args
      */
-    function translation_jscache(&$event, $args) {
+    function translation_jscache(Doku_Event &$event, $args) {
         if(!isset($_GET['lang'])) return;
         if(!in_array($_GET['lang'], $this->helper->translations)) return;
 
@@ -185,7 +185,7 @@ class action_plugin_autotranslation extends DokuWiki_Action_Plugin {
      * @param $event
      * @param $args
      */
-    function translate_media_manager(&$event, $args) {
+    function translate_media_manager(Doku_Event &$event, $args) {
         global $conf;
         if(isset($_REQUEST['ID'])) {
             $id = getID();
@@ -204,7 +204,7 @@ class action_plugin_autotranslation extends DokuWiki_Action_Plugin {
     /**
      * Hook Callback. Change the UI language in foreign language namespaces
      */
-    function translation_hook(&$event, $args) {
+    function translation_hook(Doku_Event &$event, $args) {
         global $ID;
         global $lang;
         global $conf;
@@ -250,7 +250,7 @@ class action_plugin_autotranslation extends DokuWiki_Action_Plugin {
      * Hook Callback.  Resort page match results so that results are ordered by translation, having the
      * default language first
      */
-    function translation_search(&$event, $args) {
+    function translation_search(Doku_Event &$event, $args) {
 
         if($event->data['has_titles']) {
             // sort into translation slots
