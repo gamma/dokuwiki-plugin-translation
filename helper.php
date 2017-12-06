@@ -61,7 +61,7 @@ class helper_plugin_autotranslation extends DokuWiki_Plugin {
      * Find the current translation namespace
      * This may be detected automatically or defined by the config option
      **/
-    function setupTNS($ID="") {
+    function setupTNS($ID="", $forceAutotranslation=false) {
         global $conf;
 
         if ( !empty( $this->translationsNs) ) { return $this->translationsNs; }
@@ -69,7 +69,7 @@ class helper_plugin_autotranslation extends DokuWiki_Plugin {
 
         // autodetect?
         // this will only work for namespaces other than the root and default language
-        if ( $this->getConf('autodetectnamespace') )
+        if ( $forceAutotranslation || $this->getConf('autodetectnamespace') )
         {
             $lang = explode(':', $ID);
             foreach( array_reverse($lang) as $tns )
