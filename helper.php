@@ -483,7 +483,7 @@ class helper_plugin_autotranslation extends DokuWiki_Plugin {
             $inputID = $ID;
         }
 
-        if ( !$this->istranslatable($id) ) return false;
+        if ( !$this->istranslatable($ID) ) return false;
 
         $idpart = $this->getIDPart($inputID);
 
