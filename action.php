@@ -31,7 +31,7 @@ class action_plugin_autotranslation extends \dokuwiki\Extension\ActionPlugin {
      * Register the events
      */
     function register(Doku_Event_Handler $controller) {
-        $scriptName = basename($_SERVER['PHP_SELF']);
+        $scriptName = basename($_SERVER['PHP_SELF'] ?? '');
 
         // should the lang be applied to UI?
         if($this->getConf('translateui')) {
@@ -386,7 +386,7 @@ class action_plugin_autotranslation extends \dokuwiki\Extension\ActionPlugin {
             }
         }
         
-        if ( wl( $url, $more, true, '&') != DOKU_URL . substr($_SERVER['REQUEST_URI'], 1) ) {
+        if ( wl( $url, $more, true, '&') != DOKU_URL . substr($_SERVER['REQUEST_URI'] ?? '', 1) ) {
             header('Location: ' . wl( $url, $more, true, '&'), 302);
             exit;
         }

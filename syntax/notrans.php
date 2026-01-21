@@ -19,7 +19,7 @@ class syntax_plugin_autotranslation_notrans extends DokuWiki_Syntax_Plugin {
      * Constructor. Load helper plugin
      */
     function __construct(){
-        $this->hlp =& plugin_load('helper', 'autotranslation');
+        $this->hlp = plugin_load('helper', 'autotranslation');
     }
 
     /**

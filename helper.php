@@ -22,7 +22,7 @@ class helper_plugin_autotranslation extends DokuWiki_Plugin {
      * Initialize
      */
     function __construct() {
-        global $conf;
+        global $conf, $JSINFO;
         require_once(DOKU_INC . 'inc/pageutils.php');
         require_once(DOKU_INC . 'inc/utf8.php');
 
@@ -140,6 +140,9 @@ class helper_plugin_autotranslation extends DokuWiki_Plugin {
      * languages
      */
     function getBrowserLang() {
+        if(empty($_SERVER['HTTP_ACCEPT_LANGUAGE'])) {
+            return false;
+        }
         $rx = '/(^|,|:|;|-)(' . join('|', $this->translations) . ')($|,|:|;|-)/i';
         if(preg_match($rx, $_SERVER['HTTP_ACCEPT_LANGUAGE'], $match)) {
             return strtolower($match[2]);
@@ -489,7 +492,7 @@ class helper_plugin_autotranslation extends DokuWiki_Plugin {
 
         foreach($this->translations as $t)
         {
-            list($link,$name) = $this->buildTransID($t,$idpart,false);
+            list($link,$name) = $this->buildTransID($t,$idpart);
             $link = cleanID($link);
 
             if( $inputID != $link && page_exists($link,'',false) ){
