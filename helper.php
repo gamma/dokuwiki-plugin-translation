@@ -481,12 +481,14 @@ class helper_plugin_autotranslation extends DokuWiki_Plugin {
     function hasTranslation($inputID = null) {
         global $ID, $INFO, $conf;
 
-        if ( empty($inputID) )
-        {
-            $inputID = $ID;
+        if ( empty($inputID) ) {
+            $inputID = (isset($ID) && $ID !== '') ? $ID : getID();
+        }
+        if ( $inputID === '' || $inputID === null ) {
+            return false;
         }
 
-        if ( !$this->istranslatable($ID) ) return false;
+        if ( !$this->istranslatable($inputID) ) return false;
 
         $idpart = $this->getIDPart($inputID);
 
